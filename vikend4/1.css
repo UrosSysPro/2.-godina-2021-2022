@@ -10,12 +10,18 @@ body{
     height: 100%;
     float: left;
     padding-top: 50px; 
+    padding-left: 30px;
+    padding-right: 30px;  
+    box-sizing: border-box;
 }
 .divDesno{
     width: 50%;
     height: 100%;
     float: right;
     padding-top: 50px; 
+    padding-left: 30px;
+    padding-right: 30px;  
+    box-sizing: border-box;
 }
 #crno{
     background-color: black;
@@ -38,4 +44,27 @@ body{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+}
+#prviNaslov{
+    margin-bottom: 100px;
+}
+a{
+    text-align: center;
+    display: block; 
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+#hoverZeleno:hover{
+    background-color: aquamarine;
+}
+#hoverRoze:hover{
+    background-color: pink;
+}
+#hoverPlavo:hover{
+    background-color: aqua
+}
+#sivoPlavo img{
+    width: 300px;
+    height: 300px;
 }
