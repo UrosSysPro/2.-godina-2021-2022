@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.red{
+    width: 100%;
+    height: 700px;
+}
+.levo{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+.desno{
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+
+#crno{
+    background-color: black;
+    color: white;
+}
+
+#plavo{
+    color: white;
+    background-color: #607d8b;
+}
+#sivo{
+    background-color: #f1f1f1;
+}
+#indigo{
+    background-color: #3f51b5;
+}
+#tamnoSivo{
+    background-color: #616161;
+}
+#teal{
+    background-color: #009688;
+}

@@ -1,0 +1,32 @@
+#prviDiv{
+    width: 200px;
+    height: 150px;
+    background-color: orangered;
+    padding: 30px;
+    margin: 30px;
+    border: 5px solid darkslategrey;
+    color: white;
+}
+
+.ostali{
+    width: 50px;
+    height: 50px;
+    background-color: yellowgreen;
+    margin: 20px;
+    border: thistle;
+    display: inline-block;
+}
+
+/* ovo je komentar */
+
+/* width i height su visina i sirina */
+/* color je boja teksta a background color je boja pozadine */
+
+/* padding je prostor unutar elementa gde ne moze nista da stoji */
+/* margin isto sto i padding samo spolja */
+
+/* border se nalazi izmedju margine i paddinga  */
+
+/* display: block znaci da posle elementa ide enter */
+
+/* display: inline-block znaci da posle elementa sledeci ide u istom redu */

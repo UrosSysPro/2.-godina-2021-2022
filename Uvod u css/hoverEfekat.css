@@ -1,0 +1,12 @@
+div{
+    width: 300px;
+    background-color: teal;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-left: 300px;
+    margin-top: 10px;
+}
+div:hover{
+    background-color: tomato;
+}
