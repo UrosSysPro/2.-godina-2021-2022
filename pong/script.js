@@ -47,6 +47,9 @@ function main(){
     bx=w/2-ballWidth/2;
     by=h/2-ballHeight/2;
 
+    document.body.addEventListener("keydown",strelicaDole);
+    document.body.addEventListener("keyup",strelicaGore);
+
     premestiIgrace();
     setInterval(loop,1000/60);
 }
@@ -64,10 +67,88 @@ function premestiIgrace(){
 
 
 function loop(){
-    bx+=vLopteX;
-    by+=vLopteY;
-    if(bx+ballWidth>=w||bx<=0)vLopteX=-vLopteX;
-    if(by+ballHeight>=h||by<=0)vLopteY=-vLopteY;
+    pomeriLoptu();    
+
+    input();
 
     premestiIgrace();
+}
+
+function input(){
+    let brzina=7;
+    if(keyW==true){
+        p1y-=brzina;
+        if(p1y<0)p1y=0;
+    }
+    if(keyS==true){
+        p1y+=brzina;
+        if(p1y+playerHeight>h)p1y=h-playerHeight;
+    }
+    if(keyUp==true){
+        p2y-=brzina;
+        if(p2y<0)p2y=0;
+    }
+    if(keyDown==true){
+        p2y+=brzina;
+        if(p2y+playerHeight>h)p2y=h-playerHeight;
+    }
+}
+
+function pomeriLoptu(){
+    bx+=vLopteX;
+    by+=vLopteY;
+    if(by+ballHeight>=h||by<=0)vLopteY=-vLopteY;
+
+    if(bx+ballWidth>w){
+        let score1=document.getElementById("score1");
+        let s=parseInt(score1.innerHTML)+1;
+        score1.innerHTML=s;
+        bx=w/2-ballWidth/2;
+        by=h/2-ballHeight/2;
+        vLopteX=-4;
+        vLopteY=0;
+    }
+    if(bx<0){
+        let score2=document.getElementById("score2");
+        let s=parseInt(score2.innerHTML)+1;
+        score2.innerHTML=s;
+        bx=w/2-ballWidth/2;
+        by=h/2-ballHeight/2;
+        vLopteX=4;
+        vLopteY=0;
+    }
+
+    if((bx>p1x+playerWidth)||(by+ballHeight<p1y)||(bx+ballWidth<p1x)||(by>p1y+playerHeight)){
+        // ne dodoiruju se
+    }else{
+        // console.log("lopta udara u igraca 1");
+        vLopteX=4;
+        let ugao=by+ballHeight/2-p1y-playerHeight/2;
+        vLopteY=ugao/10;
+        // vLopteY=//nesto
+    }
+    if((bx>p2x+playerWidth)||(by+ballHeight<p2y)||(bx+ballWidth<p2x)||(by>p2y+playerHeight)){
+        // ne dodoiruju se
+    }else{
+        // console.log("lopta udara u igraca 2");
+        vLopteX=-4;
+        let ugao=by+ballHeight/2-p2y-playerHeight/2;
+        vLopteY=ugao/10;
+        // vLopteY=nesto
+    }
+}
+
+
+function strelicaDole(e){
+    if(e.key=="w")keyW=true;
+    if(e.key=="s")keyS=true;
+    if(e.key=="ArrowUp")keyUp=true;
+    if(e.key=="ArrowDown")keyDown=true;
+}
+
+function strelicaGore(e){
+    if(e.key=="w")keyW=false;
+    if(e.key=="s")keyS=false;
+    if(e.key=="ArrowUp")keyUp=false;
+    if(e.key=="ArrowDown")keyDown=false;
 }
