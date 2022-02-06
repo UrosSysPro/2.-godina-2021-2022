@@ -1,0 +1,20 @@
+.polje{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.zid{
+    background-color: black;
+}
+.player{
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    position: absolute;
+    transition: linear 300ms;
+}
+#igra{
+    position: relative;
+}
