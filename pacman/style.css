@@ -2,7 +2,7 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
 }
 .zid{
@@ -13,7 +13,14 @@
     height: 20px;
     background-color: yellow;
     position: absolute;
-    transition: linear 300ms;
+    transition: linear 200ms;
+}
+.duh1{
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    position: absolute;
+    transition: linear 200ms;
 }
 #igra{
     position: relative;
