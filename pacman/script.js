@@ -81,6 +81,7 @@ function update(){
         px-=vx;
         py-=vy;
     }
+    updateDuh1();
     move();
 }
 
@@ -103,37 +104,88 @@ function move(){
     duh1.div.style.left=duh1.x*sirinaPolja+"px";
 }
 
+// function updateDuh1(){
+//     let mat=[];
+//     for(let i=0;i<n;i++){
+//         mat.push([]);
+//         for(let j=0;j<n;j++){
+//             mat[i].push(-1);
+//         }
+//     }
+//     mat[px][py]=0;
+//     let red=[];
+//     red.push({x:px,y:py});
+//     while(red.length!=0){
+//         let tacka=red.shift();
+//         let brKoraka=mat[tacka.x][tacka.y];
+
+//         if(tacka.x+1<n && mapa[tacka.x+1][tacka.y] && mat[tacka.x+1][tacka.y]==-1){
+//             mat[tacka.x+1][tacka.y]=brKoraka+1;
+//             red.push({x:tacka.x+1,y:tacka.y});
+//         }
+//         if(tacka.x-1<n && mapa[tacka.x-1][tacka.y] && mat[tacka.x-1][tacka.y]==-1){
+//             mat[tacka.x-1][tacka.y]=brKoraka+1;
+//             red.push({x:tacka.x-1,y:tacka.y});
+//         }
+//         if(tacka.y+1<n && mapa[tacka.x][tacka.y+1] && mat[tacka.x][tacka.y+1]==-1){
+//             mat[tacka.x][tacka.y+1]=brKoraka+1;
+//             red.push({x:tacka.x,y:tacka.y+1});
+//         }
+//         if(tacka.y-1<n && mapa[tacka.x][tacka.y-1] && mat[tacka.x][tacka.y-1]==-1){
+//             mat[tacka.x][tacka.y-1]=brKoraka+1;
+//             red.push({x:tacka.x,y:tacka.y-1});
+//         }
+//     }
+//     console.log(mat);
+// }
+
 function updateDuh1(){
     let mat=[];
     for(let i=0;i<n;i++){
         mat.push([]);
         for(let j=0;j<n;j++){
-            mat[i].push(-1);
+            if(mapa[i][j]==1)
+                mat[i].push(-2);
+            else
+                mat[i].push(-1);
         }
     }
     mat[px][py]=0;
+
     let red=[];
     red.push({x:px,y:py});
-    while(red.length!=0){
-        let tacka=red.shift();
-        let brKoraka=mat[tacka.x][tacka.y];
 
-        if(tacka.x+1<n && mapa[tacka.x+1][tacka.y] && mat[tacka.x+1][tacka.y]==-1){
-            mat[tacka.x+1][tacka.y]=brKoraka+1;
-            red.push({x:tacka.x+1,y:tacka.y});
+    while(red.length!=0){
+        let point=red.shift();
+        let x=point.x;
+        let y=point.y;
+        if(y-1>=0&&mat[x][y-1]==-1){
+            mat[x][y-1]=mat[x][y]+1;
+            red.push({x:x,y:y-1});
         }
-        if(tacka.x-1<n && mapa[tacka.x-1][tacka.y] && mat[tacka.x-1][tacka.y]==-1){
-            mat[tacka.x-1][tacka.y]=brKoraka+1;
-            red.push({x:tacka.x-1,y:tacka.y});
+        if(y+1<n&&mat[x][y+1]==-1){
+            mat[x][y+1]=mat[x][y]+1;
+            red.push({x:x,y:y+1});
         }
-        if(tacka.y+1<n && mapa[tacka.x][tacka.y+1] && mat[tacka.x][tacka.y+1]==-1){
-            mat[tacka.x][tacka.y+1]=brKoraka+1;
-            red.push({x:tacka.x,y:tacka.y+1});
+        if(x-1>=0&&mat[x-1][y]==-1){
+            mat[x-1][y]=mat[x][y]+1;
+            red.push({x:x-1,y:y});
         }
-        if(tacka.y-1<n && mapa[tacka.x][tacka.y-1] && mat[tacka.x][tacka.y-1]==-1){
-            mat[tacka.x][tacka.y-1]=brKoraka+1;
-            red.push({x:tacka.x,y:tacka.y-1});
+        if(x+1<n&&mat[x+1][y]==-1){
+            mat[x+1][y]=mat[x][y]+1;
+            red.push({x:x+1,y:y});
         }
     }
-    console.log(mat);
+    let razdaljina=mat[duh1.x][duh1.y];
+    duh1.vx=0;
+    duh1.vy=0;
+    if(mat[duh1.x-1][duh1.y]<razdaljina)duh1.vx=-1;
+    if(mat[duh1.x+1][duh1.y]<razdaljina)duh1.vx=1;
+    if(mat[duh1.x][duh1.y-1]<razdaljina)duh1.vy=-1;
+    if(mat[duh1.x][duh1.y+1]<razdaljina)duh1.vy=1;
+
+    duh1.x+=duh1.vx;
+    duh1.y+=duh1.vy;
+
+
 }
