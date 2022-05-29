@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace minesweeper
+namespace minesweaper
 {
     public partial class Form1 : Form
     {
@@ -18,7 +18,7 @@ namespace minesweeper
         }
 
         bool[,] mine;
-        int velicina = 50;
+        int velicina = 70;
         PictureBox[,] pbs;
         Label[,] labels;
         Random r = new Random();
@@ -75,7 +75,14 @@ namespace minesweeper
                         pbs[i, j].BackColor = Color.Wheat;
 
                     pbs[i, j].Click += (o, args) => {
-                        klik(o);
+                        MouseEventArgs m = (MouseEventArgs)args;
+                        if(m.Button==MouseButtons.Left)
+                            klik(o);
+                        else
+                        {
+                            PictureBox p = (PictureBox)o;
+                            p.BackColor = Color.Orange;
+                        }
                     };
                     Controls.Add(pbs[i, j]);
                 }
@@ -107,20 +114,48 @@ namespace minesweeper
             }
             else
             {
-                int brojMina = 0;
-                for (int i = -1; i <= 1; i++)
-                    for (int j = -1; j <= 1; j++)
-                        if (
-                            x + i >= 0 &&
-                            x + i < 8 &&
-                            y + j >= 0 &&
-                            y + j < 8)
-                            if (mine[x + i, y + j])
-                                brojMina++;
-                labels[x, y].Text = "" + brojMina;
-                labels[x, y].Visible = true;
+                LinkedList<Point> list = new LinkedList<Point>();
+                list.AddFirst(new Point(x,y));
+
+                
+                while (list.Count() != 0)
+                {
+                    Point p = list.Last();
+                    list.RemoveLast();
+
+                    int brojMina = 0;
+                    for (int i = -1; i <= 1; i++)
+                        for (int j = -1; j <= 1; j++)
+                            if (p.X + i >= 0 && p.X + i < 8)
+                                if (p.Y + j >= 0 && p.Y + j < 8)
+                                    if (mine[p.X + i, p.Y + j])
+                                        brojMina++;
+                    
+                    labels[p.X, p.Y].Visible = true;
+                    if (p.X % 2 == p.Y % 2)
+                        labels[p.X, p.Y].BackColor = Color.Green;
+                    else
+                        labels[p.X, p.Y].BackColor = Color.YellowGreen;
+                    if (p.X % 2 == p.Y % 2)
+                        pbs[p.X, p.Y].BackColor = Color.Green;
+                    else
+                        pbs[p.X, p.Y].BackColor = Color.YellowGreen;
+                    if (brojMina == 0)
+                    {
+                        labels[p.X, p.Y].Text ="";
+                        for (int i = -1; i <= 1; i++)
+                            for (int j = -1; j <= 1; j++)
+                                if (p.X + i >= 0 && p.X + i < 8)
+                                    if (p.Y + j >= 0 && p.Y + j < 8)
+                                        if (!labels[p.X + i, p.Y + j].Visible)
+                                            list.AddFirst(new Point(p.X+i,p.Y+j));
+                    }
+                    else
+                    {
+                        labels[p.X, p.Y].Text = brojMina+"";
+                    }
+                }
             }
         }
-
     }
 }
